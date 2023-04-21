@@ -30,13 +30,6 @@ Make your downloaded files structured like below:
 ```bash
 .
 ├── configs
-│   ├── benchmarking
-│   │   ├── middlebury.yaml
-│   │   ├── snu_film.yaml
-│   │   ├── ucf101.yaml
-│   │   └── vimeo.yaml
-│   ├── test.yaml
-│   └── train.yaml
 ├── datas
 ├── datasets
 │   ├── middlebury
@@ -48,7 +41,7 @@ Make your downloaded files structured like below:
 │   │   ├── test-extreme.txt
 │   │   ├── test-hard.txt
 │   │   └── test-medium.txt
-│   ├── ucf101 -> /data/zc/ucf101/ucf101_interp_ours
+│   ├── ucf101
 │   │   ├── 1
 │   │   ├── 1001
 │   │   ...
@@ -66,6 +59,8 @@ Make your downloaded files structured like below:
 ├── models
 ├── utils
 ├── validate
+├── train.py
+├── test.py
 └── val.py
 ```
 

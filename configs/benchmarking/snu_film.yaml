@@ -47,7 +47,7 @@ model:
     dims: [32,64,128,256]
 
 val_fn: std
-val_aug: [T,R]
+# val_aug: [T,R]
 
 val:
   snu_film_easy:
