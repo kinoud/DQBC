@@ -1,0 +1,63 @@
+model:
+  name: DQBC
+  pretrained: pretrained/510000.pth
+  size_mod: 64
+  corr:
+    arch: x
+    radius: [6,4,3]
+    stride: [1,1,1]
+    level: [0,1,2]
+
+  cnet:
+    dims: [32,64,128]
+  
+  flowgen:
+    down_scale_th: -1
+    # For high-resolution input testing, we down-scale the input 
+    # by a factor of 2 when estimating motion fields.
+    # down_scale_th=-1: disable down-scaling
+    # down_scale_th=0: certain down-scaling (when testing)
+    # down_scale_th>0: automatic down-scaling with threshold (when testing)
+    corr_manip:
+      out_c: 192
+
+    c: 256
+    inet:
+      dims: [64,128,256]
+    norm: group8
+
+  flowup:
+    norm: none
+    mlp_ratio: 4
+    conv_block: 373
+    dims: [32,64,128,256]
+
+  flowtea:
+    arch: ifblock
+    recalc_mask: false
+    c: 90
+    margin: 0.1
+    w_tea: [.5,1,1,1]
+    
+  synth:
+    acnet:
+      dims: [64,128,256]
+    mlp_ratio: 4
+    conv_block: RBx2
+    dims: [32,64,128,256]
+
+val_fn: std
+val_aug: [T,R]
+
+val:
+  ucf101:
+    data:
+      name: UCF101
+      dataset_root: datasets/ucf101
+      rgb_order: rgb
+    viz: false
+
+exp_name: benchmark_dqbc_aug_ucf101
+reset: true
+
+# python val.py --config configs/benchmarking/ucf101.yaml --gpu_id 2

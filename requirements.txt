@@ -1,0 +1,7 @@
+scikit-image
+opencv-python
+timm
+thop
+tqdm
+pyyaml
+tensorboard

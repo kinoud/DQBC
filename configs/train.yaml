@@ -1,0 +1,101 @@
+model:
+  name: DQBC
+  train_crop_size: [256,256]
+  size_mod: 64
+  corr:
+    arch: x
+    radius: [6,4,3]
+    stride: [1,1,1]
+    level: [0,1,2]
+
+  cnet:
+    dims: [32,64,128]
+  
+  flowgen:
+    down_scale_th: 24
+    # For high-resolution input testing, we down-scale the input 
+    # by a factor of 2 when estimating motion fields.
+    # down_scale_th=-1: disable down-scaling
+    # down_scale_th=0: certain down-scaling (when testing)
+    # down_scale_th>0: automatic down-scaling with threshold (when testing)
+    corr_manip:
+      out_c: 192
+
+    c: 256
+    inet:
+      dims: [64,128,256]
+    norm: group8
+
+  flowup:
+    norm: none
+    mlp_ratio: 4
+    conv_block: 373
+    dims: [32,64,128,256]
+
+  flowtea:
+    # arch: self
+    arch: ifblock
+    recalc_mask: false
+    c: 90
+    margin: 0.1
+    # w_tea: [.25,.5,1,1,1]
+    w_tea: [.5,1,1,1]
+    
+  synth:
+    arch: mine
+    acnet:
+      dims: [64,128,256]
+    mlp_ratio: 4
+    conv_block: RBx2
+    dims: [32,64,128,256]
+
+train:
+  data:
+    name: Vimeo90K
+    dataset_root: datasets/vimeo_triplet
+    crop_size: [256,256]
+    rgb_order: rgb
+    aug_script: rife
+  batch_size: 16 # x4(GPU)
+  loss:
+    l1:
+      w: 1
+    l1_tea:
+      w: 1
+    distill:
+      w: 0.01
+  lr:
+    type: warm_cosine
+    peak: 0.0002
+    bottom: 0.000002
+    peak_step: 2000
+    total_steps: 600000
+
+  wdecay: 0.0001
+  clip: 1.0
+  save_freq: 30000
+  num_steps: 3000000
+
+val_fn: std
+
+val:
+  val-10:
+    data:
+      name: Vimeo90K
+      dataset_root: datasets/vimeo_triplet
+      rgb_order: rgb
+    
+    num_val: 10
+    rand_seed: 123
+
+    viz: true
+    val_freq: 5000
+
+log:
+  sum_freq: 500
+
+
+exp_name: dqbc
+reset: true
+
+# CUDA_VISIBLE_DEVICES=0,1,2,3 torchrun --nproc_per_node=4 --master_port 8368 train.py --config configs/train.yaml

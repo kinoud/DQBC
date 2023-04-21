@@ -1,0 +1,5 @@
+pretrained
+__pycache__
+experiments
+datasets
+*.full
