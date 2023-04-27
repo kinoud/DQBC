@@ -12,7 +12,7 @@ model:
     dims: [32,64,128]
   
   flowgen:
-    down_scale_th: 24
+    down_scale_th: -1
     # For high-resolution input testing, we down-scale the input 
     # by a factor of 2 when estimating motion fields.
     # down_scale_th=-1: disable down-scaling

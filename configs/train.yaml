@@ -1,6 +1,5 @@
 model:
   name: DQBC
-  train_crop_size: [256,256]
   size_mod: 64
   corr:
     arch: x
@@ -12,7 +11,7 @@ model:
     dims: [32,64,128]
   
   flowgen:
-    down_scale_th: 24
+    down_scale_th: -1
     # For high-resolution input testing, we down-scale the input 
     # by a factor of 2 when estimating motion fields.
     # down_scale_th=-1: disable down-scaling
@@ -33,16 +32,13 @@ model:
     dims: [32,64,128,256]
 
   flowtea:
-    # arch: self
     arch: ifblock
     recalc_mask: false
     c: 90
     margin: 0.1
-    # w_tea: [.25,.5,1,1,1]
     w_tea: [.5,1,1,1]
     
   synth:
-    arch: mine
     acnet:
       dims: [64,128,256]
     mlp_ratio: 4
