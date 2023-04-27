@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This repository is the official implementation of the IJCAI 2023 paper "Video Frame Interpolation with Densely Queried Bilateral Correlation".
+This repository is the official implementation of the IJCAI 2023 paper "Video Frame Interpolation with Densely Queried Bilateral Correlation". [[paper](https://arxiv.org/abs/2304.13596)]
 
 ## Requirements
 
@@ -72,9 +72,12 @@ python val.py --config configs/benchmarking/ucf101.yaml --gpu_id 0
 python val.py --config configs/benchmarking/snu_film.yaml --gpu_id 0
 ```
 
+To enable the augmented test (**"Ours-Aug"** in the paper), uncomment the `val_aug: [T,R]` line in the configuration files.
 
 
 ## Training
+
+The model was trained on the Vimeo90K-triplet training split.
 
 Run the following command for training:
 
@@ -84,7 +87,7 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 torchrun --nproc_per_node=4 --master_port 9999 trai
 
 ## Testing on a Custom Image Pair
 
-After you have trained the model, specify the path of the model weights in `configs/test.yaml`.
+First specify the path of the model weights in `configs/test.yaml`.
 
 Then you can test the model on a customized image pair as:
 
