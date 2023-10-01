@@ -99,7 +99,7 @@ def make_config(cfg_file:str=None,launch_experiment=True):
     notions: 1. "require" 2. [option] 3. (auto generated)
     
     "model"
-    "reset": wether to regenerate experiment dirs and discard the old ones
+    "reset": whether to regenerate experiment dirs and discard the old ones
     [exp_name]: experiment name, same as config file if not assigned
     (exp_name): same with config file name
     (exp_root): experiments/exp_name

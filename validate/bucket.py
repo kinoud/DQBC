@@ -40,7 +40,7 @@ class Bucket:
         
     def get_anonymous_name(self):
         self.random_id += 1
-        return '_anonymouse_'+str(self.random_id)
+        return '_anonymous_'+str(self.random_id)
     
     def full_name(self,name):
         prefix = '.'.join(self._prefix)+'.'
