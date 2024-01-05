@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This repository is the official implementation of the IJCAI 2023 paper "Video Frame Interpolation with Densely Queried Bilateral Correlation". [[paper](https://arxiv.org/abs/2304.13596)]
+This repository is the official implementation of the IJCAI 2023 paper "Video Frame Interpolation with Densely Queried Bilateral Correlation". [[paper](https://www.ijcai.org/proceedings/2023/198)]
 
 ## Requirements
 
@@ -93,4 +93,22 @@ Then you can test the model on a customized image pair as:
 
 ```bash
 python test.py --config configs/test.yaml --im0 <path to im0> --im1 <path to im1> --output_dir <path to output folder>
+```
+
+## Cite
+```
+@inproceedings{ijcai2023p198,
+  title     = {Video Frame Interpolation with Densely Queried Bilateral Correlation},
+  author    = {Zhou, Chang and Liu, Jie and Tang, Jie and Wu, Gangshan},
+  booktitle = {Proceedings of the Thirty-Second International Joint Conference on
+               Artificial Intelligence, {IJCAI-23}},
+  publisher = {International Joint Conferences on Artificial Intelligence Organization},
+  editor    = {Edith Elkind},
+  pages     = {1786--1794},
+  year      = {2023},
+  month     = {8},
+  note      = {Main Track},
+  doi       = {10.24963/ijcai.2023/198},
+  url       = {https://doi.org/10.24963/ijcai.2023/198},
+}
 ```
